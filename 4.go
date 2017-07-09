@@ -1,3 +1,10 @@
+/*
+     A palindromic number reads the same both ways. The largest palindrome made
+     from the product of two 2-digit numbers is 9009 = 91 × 99.
+
+     Find the largest palindrome made from the product of two 3-digit numbers.
+*/
+
 package main
 
 import (
@@ -5,6 +12,7 @@ import (
 	"time"
 )
 
+// reverses a string because those assholes dont have .reverse() :-(
 func reverse(s string) string {
 	rune := make([]rune, len(s))
 	n := 0
@@ -20,6 +28,7 @@ func reverse(s string) string {
 	return string(rune)
 }
 
+// returns true if number is palindromic in base 10
 func is_palindrome(n uint64) bool {
 	s := fmt.Sprintf("%d", n)
 	if s == reverse(s) {
