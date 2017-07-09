@@ -7,11 +7,12 @@ and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
 Find the sum of the digits in the number 100!
 */
 
-package main
+// Arbitrary precision library to calculate 100 facttorial.
+
+package eulergo
 
 import (
 	"fmt"
-	"time"
     "math/big"
 )
 
@@ -24,21 +25,12 @@ func factorial(n int64) *big.Int {
     return bigN
 }
 
-
-func main() {
-	start := time.Now()
-
-    //calculate
+func Solution20() {
     val := factorial(int64(100))
-
-    // convert to string, then add digits
     sum := uint64(0)
     s := fmt.Sprintf("%d", val)
     for _, i := range(s) {
         sum += uint64(i - '0')
     }
-
-    end := time.Now()
     fmt.Println("Sum:", sum)
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

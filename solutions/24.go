@@ -10,17 +10,14 @@
     0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 */
 
-package main
-
-import (
-	"fmt"
-	"time"
-)
-
-// don't need to enumerate all of them because there are n! permutations of n
-// items.  So there are 9! permutations with 0 as the first number, another 
+// We don't need to enumerate all of them because there are n! permutations of 
+// n items.  So there are 9! permutations with 0 as the first number, another 
 // 9! with 1 as the first number, etc.
 // so we recursively solve for each number
+
+package eulergo
+
+import "fmt"
 
 func fact(n int) int {
     prod := 1
@@ -44,7 +41,8 @@ func lexOrder(nth int, choices, current []int) {
         count++
         nth -= consumes
     }
-    // add the winning choice to our winning slice
+
+    // add the winning choice to our current slice
     current = append(current, choices[count])
 
     // construct a new list of choices minus the choice we used
@@ -60,19 +58,14 @@ func lexOrder(nth int, choices, current []int) {
     lexOrder(nth, newChoices, current)
 }
 
-func main() {
-	start := time.Now()
-
+func Solution24() {
     choices := make([]int, 10, 10)
     current := make([]int, 0, 0)
     for i := range(choices) {
         choices[i] = i
     }
 
-    // the first ordering is the 0th, so we want the 999,999th ordering 
-    // rather than the 1,000,000th
+    // the first ordering is the 0th, so we want the 1,000,000th ordering 
+    // has index 999,999
     lexOrder(1e6 - 1, choices, current)
-
-	end := time.Now()
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

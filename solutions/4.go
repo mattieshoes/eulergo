@@ -5,14 +5,13 @@
    Find the largest palindrome made from the product of two 3-digit numbers.
 */
 
-package main
+// A simple palindrome test is reversing a number's digits and testing for
+// equality
 
-import (
-	"fmt"
-	"time"
-)
+package eulergo
 
-// reverses a string because those assholes dont have .reverse() :-(
+import "fmt"
+
 func reverse(s string) string {
 	rune := make([]rune, len(s))
 	n := 0
@@ -37,8 +36,7 @@ func is_palindrome(n uint64) bool {
 	return false
 }
 
-func main() {
-	start := time.Now()
+func Solution4() {
 	max := uint64(0)
 	for a := uint64(999); a >= 100; a-- {
 		for b := uint64(999); b >= 100; b-- {
@@ -51,7 +49,5 @@ func main() {
 			}
 		}
 	}
-	end := time.Now()
 	fmt.Println("Largest:", max)
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

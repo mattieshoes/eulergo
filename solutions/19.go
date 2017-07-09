@@ -18,16 +18,16 @@
 
 */
 
-package main
+// yay for date functions...
+
+package eulergo
 
 import (
 	"fmt"
 	"time"
 )
 
-// yay for date functions...
-func main() {
-	start := time.Now()
+func Solution19() {
     count := 0
     for year := 1901; year < 2001; year++ {
         for month := 1; month <= 12; month++ {
@@ -37,7 +37,5 @@ func main() {
             }
         }
     }
-	end := time.Now()
     fmt.Println("Sundays: ", count)
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

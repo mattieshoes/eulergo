@@ -6,17 +6,17 @@
 
 */
 
-package main
+// Uses arbitrary precision integers to calculate the actual sum, converts
+// it to a string, and prints the first 10 digits
+
+package eulergo
 
 import (
 	"fmt"
-	"time"
     "math/big"
 )
 
-// Just uses arbitrary precision integers to calculate the actual sum, converts
-// it to a string, and prints the first 10 digits
-func main() {
+func Solution13() {
     list := []string{
         "37107287533902102798797998220837590246510135740250",
         "46376937677490009712648124896970078050417018260538",
@@ -118,17 +118,12 @@ func main() {
         "72107838435069186155435662884062257473692284509516",
         "20849603980134001723930671666823555245252804609722",
         "53503534226472524250874054075591789781264330331690"}
-	start := time.Now()
-
     sum := new(big.Int)
     val := new(big.Int)
-
     for _, i := range(list) {
         val.SetString(i, 10)
         sum.Add(sum, val)
     }
     s := fmt.Sprintf("%d", sum)
-	end := time.Now()
     fmt.Println("First 10 digits:", s[:10])
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

@@ -4,19 +4,18 @@
 What is the sum of the digits of the number 2^1000?
 */
 
-package main
+// Just uses arbitrary precision integers to calculate the actual sum, converts
+// it to a string, and prints the first 10 digits
+
+package eulergo
 
 import (
 	"fmt"
-	"time"
     "math/big"
 )
 
-// Just uses arbitrary precision integers to calculate the actual sum, converts
-// it to a string, and prints the first 10 digits
-func main() {
-	start := time.Now()
-
+func Solution16() {
+    
     // calculate 2^1000
     base := big.NewInt(int64(2))
     answer := big.NewInt(int64(1))
@@ -30,8 +29,5 @@ func main() {
     for _, i := range(s) {
         sum += uint64(i - '0')
     }
-	
-    end := time.Now()
     fmt.Println("Sum:", sum)
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

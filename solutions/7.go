@@ -5,24 +5,19 @@
    What is the 10 001st prime number?
 */
 
-package main
-
-import (
-	"fmt"
-	"time"
-)
-
 // just builds a list of primes until it reaches 10,001 elements
 
-func main() {
-	start := time.Now()
+package eulergo
 
+import "fmt"
+
+func Solution7() {
 	primes := make([]uint64, 0)
 	primes = append(primes, uint64(2))
 	for v := uint64(3); ; v += 2 {
 		found := false
 		for _, i := range primes {
-			if v%i == 0 {
+			if v % i == 0 {
 				found = true
 				break
 			}
@@ -34,8 +29,5 @@ func main() {
 			}
 		}
 	}
-
-	end := time.Now()
 	fmt.Println("Answer:", primes[10000])
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

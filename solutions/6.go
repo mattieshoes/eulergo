@@ -12,24 +12,17 @@
    natural numbers and the square of the sum.
 */
 
-package main
+package eulergo
 
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
 
-func main() {
-	start := time.Now()
+func Solution6() {
 	sumSquare := uint64(0)
 	squareSum := uint64(0)
-
 	for i := uint64(1); i <= 100; i++ {
 		squareSum += i
 		sumSquare += i * i
 	}
 	squareSum *= squareSum
-	end := time.Now()
-	fmt.Println("Answer:", squareSum-sumSquare)
-	fmt.Printf("Time: %v\n", end.Sub(start))
+	fmt.Println("Difference:", squareSum-sumSquare)
 }

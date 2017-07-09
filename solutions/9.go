@@ -9,19 +9,13 @@
    Find the product abc.
 */
 
-package main
+package eulergo
 
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
 
-func main() {
-	start := time.Now()
-
+func Solution9() {
 	var a, b, c uint64
 	found := false
-
 	for a = 1; a < 333; a++ {
 		for b = a + 1; 1000-a-b > b; b++ {
 			c = 1000 - a - b
@@ -29,15 +23,10 @@ func main() {
 				found = true
 				break
 			}
-
 		}
 		if found {
 			break
 		}
 	}
-
-	end := time.Now()
-	fmt.Println(a, b, c)
 	fmt.Println("Product:", a*b*c)
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

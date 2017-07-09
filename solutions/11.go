@@ -29,15 +29,8 @@
     (up, down, left, right, or diagonally) in the 20×20 grid?
 */
 
-package main
-
-import (
-	"fmt"
-	"time"
-)
-
 // Created 4 separate functions to check products, one for each direction
-// mostly to test concurrency features in go.
+// mostly to test concurrency features in Go.
 // could create separate channels and close them, or count the number of 
 // results, but I wanted to figure out how to receive an arbitrary number
 // of results from each function.  So they send a done signal to a 
@@ -46,6 +39,10 @@ import (
 // normal channel.  So it waits until there's nothing in either 
 // channel before continuing via a default select.  Feels hacky
 // but I'm not sure how to do it more cleanly
+
+package eulergo
+
+import "fmt"
 
 func checkHorizontal(arr [][]uint64, c chan uint64, done chan int) {
     for y := 0; y < len(arr); y++ {
@@ -80,9 +77,7 @@ func checkReverseDiagonal(arr [][]uint64, c chan uint64, done chan int) {
     done <- 0
 }
 
-func main() {
-
-    // no constant arrays :-(
+func Solution11() {
     var arr = [][]uint64{
         { 8,  2, 22, 97, 38, 15,  0, 40,  0, 75,  4,  5,  7, 78, 52, 12, 50, 77, 91,  8},
         {49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48,  4, 56, 62,  0},
@@ -104,16 +99,18 @@ func main() {
         {20, 69, 36, 41, 72, 30, 23, 88, 34, 62, 99, 69, 82, 67, 59, 85, 74,  4, 36, 16},
         {20, 73, 35, 29, 78, 31, 90,  1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57,  5, 54},
         { 1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52,  1, 89, 19, 67, 48}}
-	start := time.Now()
 
+    // make channels.  threads send results to c, and a message to done when they've finished
     c := make(chan uint64, 10)
     done := make(chan int)
 
+    //kick off 4 threads doing checks
     go checkHorizontal(arr, c, done)
     go checkVertical(arr, c, done)
     go checkDiagonal(arr, c, done)
     go checkReverseDiagonal(arr, c, done)
 
+    //pull results off the channel, track the largest
     finished := 0
     best := uint64(0)
     for finished < 5 {
@@ -125,12 +122,14 @@ func main() {
             case <- done:
                 finished++
             default:
+                // increments finished when there's nothing to read on the 
+                // (perhaps bad) assumption that if c is currently empty and
+                // the four threads have sent done messages, we have received
+                // all we'll ever receive
                 if finished == 4 {
                     finished++;
                 }
         }
     }
-	end := time.Now()
 	fmt.Println("Best:", best)
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

@@ -19,11 +19,10 @@
     sum of two abundant numbers.
 */
 
-package main
+package eulergo
 
 import (
 	"fmt"
-	"time"
     "math"
 )
 
@@ -54,10 +53,7 @@ func sumDivisors(n uint64) uint64 {
     return sum
 }
 
-
-func main() {
-	start := time.Now()
-
+func Solution23() {
     // Create abundant number list
     abundant := make([]uint64, 0, 0)
     for i := uint64(0); i < 28123; i++ {
@@ -81,8 +77,5 @@ func main() {
             sum += uint64(i)
         }
     }
-
-	end := time.Now()
     fmt.Println("Sum:", sum)
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

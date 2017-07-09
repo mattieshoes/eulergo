@@ -5,22 +5,16 @@
    Find the sum of all the multiples of 3 or 5 below 1000.
 */
 
-package main
+package eulergo
 
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
 
-func main() {
-	start := time.Now()
+func Solution1() {
 	var sum int
 	for i := 1; i < 1000; i++ {
 		if i%3 == 0 || i%5 == 0 {
 			sum += i
 		}
 	}
-	end := time.Now()
 	fmt.Println("Sum:", sum)
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

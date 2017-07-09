@@ -6,20 +6,16 @@
    numbers from 1 to 20?
 */
 
-package main
-
-import (
-	"fmt"
-	"time"
-)
-
 // we can ignore the numbers from 1-10 since anything divisible by 11-20
 // will automatically be divisible by 1-10
 
-func main() {
-	start := time.Now()
-	var val uint64
-	for val = 20; ; val += 20 {
+package eulergo
+
+import "fmt"
+
+func Solution5() {
+	val := uint64(20)
+	for ;;val += 20 {
 		found := true
 		for div := uint64(20); div > 10; div-- {
 			if val%div != 0 {
@@ -31,8 +27,5 @@ func main() {
 			break
 		}
 	}
-
-	end := time.Now()
 	fmt.Println("Answer:", val)
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

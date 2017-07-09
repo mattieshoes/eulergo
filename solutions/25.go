@@ -22,11 +22,10 @@
     1000 digits?
 */
 
-package main
+package eulergo
 
 import (
 	"fmt"
-	"time"
     "math/big"
 )
 
@@ -46,8 +45,7 @@ func Fib() func() (int, int) {
     }
 }
 
-func main() {
-	start := time.Now()
+func Solution25() {
     f := Fib()
     for {
         sub, digits := f()
@@ -56,6 +54,4 @@ func main() {
             break;
         }
     }
-    end := time.Now()
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

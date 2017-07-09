@@ -4,21 +4,17 @@
    Find the sum of all the primes below two million.
 */
 
-package main
+// Go doesn't  have bitfields, but you can use them as such
+// Uses a 2,000,000 bit bitfield and sieve method to find primes
+
+package eulergo
 
 import (
 	"fmt"
 	"math"
-	"time"
 )
 
-// Go doesn't  have bitfields, but you can use them as such
-// Uses a 2,000,000 bit bitfield and sieve method to find primes
-
-func main() {
-	start := time.Now()
-
-	// bitfield of primes 0-1999999
+func Solution10() {
 	// bit value of 0 indicates prime, 1 not
 	var bitfield [31250]uint64
 
@@ -39,8 +35,8 @@ func main() {
 		}
 	}
 
-	sum := uint64(0)
 	//iterate through array, converting to numbers
+	sum := uint64(0)
 	for a := range bitfield {
 		for b := uint64(0); b < 64; b++ {
 			val := uint64(a)*64 + b
@@ -50,8 +46,5 @@ func main() {
 			}
 		}
 	}
-
-	end := time.Now()
 	fmt.Println("Sum:", sum)
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

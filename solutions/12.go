@@ -20,11 +20,13 @@
     divisors?
 */
 
-package main
+// Just brute forces factors.  There's probably a clever algorithm to determine
+// number of factors, but this finishes in under half a second
+
+package eulergo
 
 import (
 	"fmt"
-	"time"
     "math"
 )
 
@@ -39,11 +41,7 @@ func triangleNumbers() func() uint64 {
     }
 }
 
-// Just brute forces factors.  There's probably a clever algorithm to determine
-// number of factors, but this finishes in under half a second
-func main() {
-	start := time.Now()
-
+func Solution12() {
     gen := triangleNumbers()
     for {
         val := gen()
@@ -63,7 +61,4 @@ func main() {
             break
         }
     }
-
-	end := time.Now()
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

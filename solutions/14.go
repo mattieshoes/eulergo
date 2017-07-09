@@ -18,14 +18,13 @@
     NOTE: Once the chain starts the terms are allowed to go above one million.
 */
 
-package main
+// memory backed collatz function which caches partial results in a map
+// to short circuit future searches
 
-import (
-	"fmt"
-	"time"
-)
+package eulergo
 
-// memory backed function which caches partial results in a map
+import "fmt"
+
 func collatz(n uint64, solved map[uint64]uint64) uint64 {
     answer := solved[n]
     if(answer > 0) {
@@ -40,8 +39,7 @@ func collatz(n uint64, solved map[uint64]uint64) uint64 {
     return answer
 }
 
-func main() {
-	start := time.Now()
+func Solution14() {
     solved := make(map[uint64]uint64)
     solved[1] = 1
     best := uint64(0)
@@ -53,7 +51,5 @@ func main() {
             bestI = i
         }
     }
-	end := time.Now()
     fmt.Printf("Best: %d (%d)\n", bestI, best)
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }

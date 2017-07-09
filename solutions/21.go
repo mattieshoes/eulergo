@@ -11,15 +11,14 @@
     Evaluate the sum of all the amicable numbers under 10000.
 */
 
-package main
+package eulergo
 
 import (
 	"fmt"
-	"time"
     "math"
 )
 
-func divisors(n uint64) []uint64 {
+func divisors21(n uint64) []uint64 {
     d := make([]uint64, 0, 0)
     if n <= 1 {
         return d
@@ -37,8 +36,8 @@ func divisors(n uint64) []uint64 {
     return d
 }
 
-func sumDivisors(n uint64) uint64 {
-    list := divisors(n)
+func sumDivisors21(n uint64) uint64 {
+    list := divisors21(n)
     sum := uint64(0)
     for _, val := range(list) {
         sum += val
@@ -47,24 +46,16 @@ func sumDivisors(n uint64) uint64 {
 }
 
 
-func main() {
-	start := time.Now()
-
-    //build list
+func Solution21() {
     var list [10001]uint64
     for i := range(list) {
-        list[i] = sumDivisors(uint64(i))
+        list[i] = sumDivisors21(uint64(i))
     }
-
-    //eval list
     sum := uint64(0)
     for i := range(list) {
         if list[i] < uint64(i) && list[list[i]] == uint64(i) {
             sum += uint64(i) + list[i]
         }
     }
-
-	end := time.Now()
     fmt.Println("Sum:", sum)
-	fmt.Printf("Time: %v\n", end.Sub(start))
 }
